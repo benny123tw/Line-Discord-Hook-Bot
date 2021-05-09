@@ -1,0 +1,11 @@
+{
+    "bot": {
+        "name": "Line",
+        "token": "TOKEN_LINE",
+        "tag": "[LNE]",
+        "prefix": "$$",
+        "author": "Benny Yen",
+        "version": "0.0.1",
+        "footer": "Copyright ©️ 2021 Line&Discord Hook Bot."    
+    } 
+}
