@@ -1,8 +1,18 @@
-export declare interface Command {
+import { Message } from "discord.js";
+import { Bot } from "./Bot";
+
+export declare interface CommandConfig {
     name: string;
     aliases: string[];
     permissions: permissions[];
     description: string;
+}
+
+export declare interface CommandOptions {
+    message: Message;
+    args: string[];
+    cmd: string;
+    bot: Bot;
 }
 
 export type permissions = 

@@ -1,14 +1,14 @@
 export declare interface Config {    
-    bot: Bot;
+    bot: BotConfig;
 }
 
-export declare interface Bot {
-    name:    string;
-    token:   string;
-    tag:     string;
-    prefix:  string;
-    author:  string;
-    version: string;
+export declare interface BotConfig {
+    name:     string;
+    token:    string;
+    tag:      string;
+    prefix:   string;
+    author:   string;
+    version:  string;
     footer?:  string;
 }
 

@@ -7,4 +7,3 @@ const { bot } = config;
 
 bot.token = process.env[bot.token];
 const mBot = new Bot(bot);
-console.log(mBot)
