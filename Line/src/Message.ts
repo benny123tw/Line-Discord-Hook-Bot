@@ -24,15 +24,38 @@ export default async (event: WebhookEvent, client: Client): Promise<MessageAPIRe
 
     await discord.sendMessage(text, data);
 
-    await client.replyMessage(replyToken, {
-        type: "text",
-        text: "Discord Server Recieved Your Message!"
-    });
+    if (!event.source.userId) return;
 
-    return client.replyMessage(replyToken, {
-        "type": "sticker",
-        "packageId": "446",
-        "stickerId": "1988"
-      });
+    return await client.pushMessage(event.source.userId, [
+        {
+            type: "text",
+            text: "Discord Server Recieved Your Message!"
+        }, 
+        {
+            "type": "sticker",
+            "packageId": "446",
+            "stickerId": "1988"
+        },
+        {
+            "type": "template",
+            "altText": "Accept Invite",
+            "template": {
+                "type": "confirm",
+                "text": "Are you sure?",
+                "actions": [
+                    {
+                      "type": "uri",
+                      "label": "Yes",
+                      "uri": "https://discord.gg/4cQRHcUk"
+                    },
+                    {
+                      "type": "message",
+                      "label": "No",
+                      "text": "no"
+                    }
+                ]
+            }
+          }
+    ]);
 }
 

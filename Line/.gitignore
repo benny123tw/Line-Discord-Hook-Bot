@@ -3,3 +3,9 @@ node_modules/
 
 # Built files.
 dist/
+
+# enviroment
+.env
+
+#test
+test.ts

@@ -8,7 +8,7 @@
     "build": "npm run clean && tsc",
     "start": "node dist/index.js",
     "push": "git add . && git commit -m \"TEST\" && git push heroku master",
-    "test": "nodemon --exec ts-node src/app.ts"
+    "test": "nodemon --exec ts-node src/test.ts"
   },
   "author": "Nicholas Dwiarto <nicholasdwiarto@yahoo.com> (https://nicholasdw.com)",
   "dependencies": {

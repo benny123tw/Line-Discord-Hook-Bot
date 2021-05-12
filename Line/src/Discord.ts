@@ -8,7 +8,7 @@ export class Discord extends WebhookClient {
         super(id, token);
     }
 
-    async sendMessage(content: string, profile: Profile): Promise<any> {
+    async sendEmbedMessage(content: string, profile: Profile): Promise<any> {
         return super.send({
             username: "Line",
             avatarURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/LINE_New_App_Icon_%282020-12%29.png/600px-LINE_New_App_Icon_%282020-12%29.png",
@@ -27,6 +27,13 @@ export class Discord extends WebhookClient {
                 }
             ]
         });
+    }
+
+    async sendMessage(content: string, profile: Profile): Promise<any> {
+        return super.send(content, {
+            username: profile.displayName,
+            avatarURL: profile.pictureUrl,
+        })
     }
 
 
