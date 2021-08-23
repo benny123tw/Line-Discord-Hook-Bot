@@ -9,6 +9,7 @@ declare global {
 
       DC_WH_ID: string;
       DC_WH_TOKEN: string;
+      MONGODB_SRV: string;
     }
   }
 }

@@ -3,6 +3,9 @@ import { ClientConfig, Client, middleware, MiddlewareConfig, WebhookEvent, TextM
 import express, { Application, Request, Response } from 'express';
 import * as axios from 'axios';
 import Message from './src/Message';
+import { Commands } from './src/Commands/index';
+
+import { MongoDB } from './src/MongoDB';
 
 // Setup all LINE client and Express configurations.
 const clientConfig: ClientConfig = {
@@ -78,6 +81,9 @@ const textEventHandler = async (event: WebhookEvent): Promise<MessageAPIResponse
   await client.replyMessage(replyToken, response);
 };
 
+const database = new MongoDB();
+Commands(); // Loading commands;
+
 // Register the LINE middleware.
 // As an alternative, you could also pass the middleware in the route handler, which is what is used here.
 // app.use(middleware(middlewareConfig));
@@ -105,7 +111,7 @@ app.post(
     const results = await Promise.all(
       events.map(async (event: WebhookEvent) => {
         try {
-          await Message(event, client);
+          await Message(event, client, database);
         } catch (err: unknown) {
           if (err instanceof Error) {
             console.error(err);
