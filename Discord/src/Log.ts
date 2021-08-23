@@ -1,5 +1,5 @@
 import * as winston from 'winston';
-import * as chalk from 'chalk';
+import chalk = require('chalk');
 
 export class Log {
 
@@ -58,19 +58,19 @@ export class Log {
     /**
      *  winston log methods
      */
-    public info(message: string): void {
+    public info(message: string | object | null | undefined): void {
         this._logger.info(message);
     }
 
-    public error(message: string): void {
+    public error(message: string | object  | null | undefined): void {
         this._logger.error(message);
     }
 
-    public debug(message: string): void {
+    public debug(message: string | object  | null | undefined): void {
         this._logger.debug(message);
     }
 
-    public warn(message: string): void {
+    public warn(message: string | object  | null | undefined): void {
         this._logger.warn(message);
     }
 }

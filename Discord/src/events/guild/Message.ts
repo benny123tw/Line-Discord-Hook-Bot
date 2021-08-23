@@ -13,12 +13,15 @@ export default async function (bot: Bot, message: Message): Promise<any> {
     const args = message.content.slice(bot.config.prefix.length).split(/ +/);
     const cmd = args.shift()?.toLowerCase();    
 
-    if (cmd) bot.commands.get(cmd)?.execute({
-        message: message,
-        args: args,
-        bot: bot,
-        cmd: cmd
-    });
+    if (cmd) {
+        bot.commands.get(cmd)?.execute({
+            message: message,
+            args: args,
+            bot: bot,
+            cmd: cmd
+        });
+        return;
+    }
 
     return message.reply("There was an error trying to execute that command!");
 }

@@ -6,6 +6,10 @@ import { BotConfig } from './Config';
 import { Events } from './events/Events';
 import { Log } from './Log';
 
+import { connect } from 'mongoose';
+import * as dotenv from 'dotenv';import chalk = require('chalk');
+ dotenv.config();
+
 export class Bot {
 
     public config: BotConfig;
@@ -23,6 +27,7 @@ export class Bot {
         ]);
         this.client = new discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'], ws: { intents } });
         this.load();
+        this.connectToDB();
     }
 
     private load(): void {
@@ -42,5 +47,18 @@ export class Bot {
     private addEvents(): void {
         new Events(this);
     } 
+
+    private async connectToDB(): Promise<void> {
+        if (!process.env.MONGODB_SRV) return;
+        
+        const result = await connect(process.env.MONGODB_SRV, {
+            useCreateIndex: true,
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+        });
+        
+        if (result) this.log.info(chalk.green`Connected to the Database!`);
+    }
 
 }
