@@ -1,4 +1,8 @@
 import { Command } from "./Command";
+import { Help } from "./help";
+import { List } from "./list";
+import { Notify } from "./notify";
+import { Send } from "./send";
 import { Subscribe } from "./subscribe";
 import { Unsubscribe } from "./unsubscribe";
 
@@ -7,8 +11,10 @@ export function Commands () {
 
     new Subscribe();
     new Unsubscribe();
-
-    console.log(Command.commands);
+    new Help();
+    new List();
+    new Notify();
+    new Send();
 
     console.log(`Loadding Successfully!`);
 }

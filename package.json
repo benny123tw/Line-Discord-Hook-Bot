@@ -1,6 +1,6 @@
 {
   "name": "line-discord-hook-bot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "hook between line chat and discord server",
   "main": "./dist/index.js",
   "scripts": {

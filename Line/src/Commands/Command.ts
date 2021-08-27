@@ -16,7 +16,7 @@ export class Command implements CommandConfig{
         Command.commands.set(this.name, this);
     }
 
-    public execute(options: CommandOptions) {
+    public execute(options: CommandOptions): any {
 
         
     }

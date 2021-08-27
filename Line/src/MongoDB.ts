@@ -1,6 +1,7 @@
 import { response } from 'express';
 import { connect, model, Document, Schema, Model } from 'mongoose';
 import User from './User';
+import Server from './Server';
 
 export class MongoDB {
 
@@ -24,25 +25,30 @@ export class MongoDB {
     }
 
     public async exsist(sourceID: string): Promise<boolean> {
-        console.log(`test ${sourceID} exsist`);
+        // console.log(`test ${sourceID} exsist`);
         const data = await User.findBySourceID(sourceID);
-        console.log(`find the database action done.`);
+        // console.log(`find the database action done.`);
         if (data) return true;
 
         return false;
     }
 
-    public async createDB(sourceID: string, username: string) {
-        console.log(`try to create ${sourceID}\'s database`);
+    public async createDB(options: dbOptions) {
+        const {
+            username,
+            sourceID
+        } = options;
+
+        // console.log(`try to create ${sourceID}\'s database`);
         if (await this.exsist(sourceID)) return "User Exsist.";
-        console.log(`check action done.`)
+        // console.log(`check action done.`)
 
         const userDB = await User.create({
             "sourceID": sourceID,
             "username": username
         });
         userDB.save();
-        console.log(`save action done.`)
+        // console.log(`save action done.`)
 
         return new Promise((resolve, reject) => {
             if (userDB) {
@@ -54,7 +60,9 @@ export class MongoDB {
         });
     }
 
-    public async subscribe(sourceID: string) {
+    public async subscribe(sourceID: string, guildID: string) {
+        const data = await Server.findByServerID( guildID );
+
         const response = await User.findOneAndUpdate(
             {
                 sourceID: sourceID
@@ -62,6 +70,9 @@ export class MongoDB {
             {
                 $set: {
                     notify: true
+                },
+                $push: {
+                    guilds: data._id
                 }
             },
             {
@@ -76,7 +87,9 @@ export class MongoDB {
         })
     }
 
-    public async unsubscribe(sourceID: string) {
+    public async unsubscribe(sourceID: string, guildID: string) {
+        const data = await Server.findByServerID( guildID );
+
         const response = await User.findOneAndUpdate(
             {
                 sourceID: sourceID
@@ -84,6 +97,9 @@ export class MongoDB {
             {
                 $set: {
                     notify: false
+                }, 
+                $pull: {
+                    guilds: data._id
                 }
             },
             {
@@ -99,6 +115,10 @@ export class MongoDB {
     }
 }
 
+export interface dbOptions {
+    username: string;
+    sourceID: string;
+}
 
 
 

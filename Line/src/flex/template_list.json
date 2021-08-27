@@ -1,0 +1,49 @@
+{
+    "type": "carousel",
+    "contents": [
+        {
+            "type": "bubble",
+            "size": "micro",
+            "hero": {
+                "type": "image",
+                "url": "https://line-discord-hook-bot.herokuapp.com/assets/server-logo.jpg",
+                "size": "full",
+                "aspectMode": "cover"
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "Discord Server 2",
+                                "color": "#37353d",
+                                "size": "md",
+                                "wrap": true,
+                                "weight": "bold",
+                                "align": "start"
+                            }
+                        ],
+                        "flex": 1
+                    }
+                ],
+                "spacing": "md",
+                "paddingAll": "12px"
+            },
+            "action": {
+                "type": "message",
+                "label": "action",
+                "text": "710002881490845706"
+            },
+            "styles": {
+                "footer": {
+                    "separator": false
+                }
+            }
+        }
+    ]
+}

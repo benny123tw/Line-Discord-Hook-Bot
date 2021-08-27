@@ -37,8 +37,6 @@ const textEventHandler = async (event: WebhookEvent): Promise<MessageAPIResponse
   const { replyToken } = event;
   const { text } = event.message;
 
-  console.log(event);
-
   // Create a new message.
   const response: TextMessage = {
     type: 'text',
@@ -90,6 +88,8 @@ Commands(); // Loading commands;
 
 // Route handler to receive webhook events.
 // This route is used to receive connection tests.
+app.use(express.static('public'));
+
 app.get(
   '/',
   async (_: Request, res: Response): Promise<Response> => {

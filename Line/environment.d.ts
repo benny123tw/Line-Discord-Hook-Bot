@@ -10,6 +10,11 @@ declare global {
       DC_WH_ID: string;
       DC_WH_TOKEN: string;
       MONGODB_SRV: string;
+      PREFIX: string;
+
+      ASSETS_URL: string;
+      SubImage: string;
+      UnsubImage: string;
     }
   }
 }
