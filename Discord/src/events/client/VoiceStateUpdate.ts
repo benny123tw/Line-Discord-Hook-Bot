@@ -1,4 +1,4 @@
-import * as chalk from 'chalk';
+import chalk = require("chalk");
 import { VoiceState, VoiceChannel } from 'discord.js';
 import { Bot } from 'src/Bot';
 import * as axios from 'axios';
@@ -62,15 +62,16 @@ export default async function (bot: Bot, oldState: VoiceState, newState: VoiceSt
 
     userStatus.channelName = channel?.name;
     
-    const result = await User.find(
-        {
-            notify: true
-        }
-    );
+    const userArr = await User.find().populate({
+        path: 'guilds',
+        match: { serverID: { $eq: newState.guild.id } }
+    });
+    
+    const result = userArr.filter(user => user.guilds.length);
 
     result.forEach((c, i) => {
         pushMessage(c.sourceID, userStatus, newState);
-    })
+    });
 }
 
 async function pushMessage(sourceID: string, userStatus: UserStatus, newState: VoiceState) {

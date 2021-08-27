@@ -4,6 +4,7 @@ import Disconnect from "./client/Disconnect";
 import Error from "./client/Error";
 import Message from "./guild/Message";
 import VoiceStateUpdate from "./client/VoiceStateUpdate";
+import GuildUpdate from "./client/GuildUpdate";
 
 export class Events {
 
@@ -19,7 +20,7 @@ export class Events {
     private setup() {
         this._ready(); this._error();
         this._disconnect(); this._message();
-        this._voiceStateUpdate();
+        this._voiceStateUpdate();this._guildUpdate();
     }
 
     private _ready = () => this._client.on("ready", this._bind(Ready));
@@ -27,6 +28,7 @@ export class Events {
     private _disconnect = () => this._client.on("disconnect", this._bind(Disconnect));
 
     private _voiceStateUpdate = () => this._client.on("voiceStateUpdate", this._bind(VoiceStateUpdate));
+    private _guildUpdate = () => this._client.on("guildUpdate", this._bind(GuildUpdate));
 
     private _message = () => this._client.on("message", this._bind(Message));
 
