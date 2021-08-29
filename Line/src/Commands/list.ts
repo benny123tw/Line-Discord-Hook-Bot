@@ -5,12 +5,14 @@ import { FlexBubble, FlexCarousel, Message } from '@line/bot-sdk';
 import { readFileSync } from 'fs';
 import path from 'path';
 import { deepCopy } from '../deep-copy';
+const webp = require('webp-converter');
 
 export class List extends Command{
 
     constructor() {
         super(
             {
+                permission: 'Free',
                 name: 'list',
                 aliases: ['l'],
                 description: 'List all your subscribed server.'
@@ -61,7 +63,10 @@ export class List extends Command{
 
                 if (bubble.hero) 
                     if (bubble.hero.type == 'image') 
-                        bubble.hero.url = guild.icon;
+                        // using jpg image
+                        bubble.hero.url = guild.icon.endsWith('.webp') ? guild.icon.slice(0, -5) + '.jpg' : guild.icon;
+                    
+                        
                     
                 if (bubble.body) 
                     if (bubble.body.type == 'box') 
@@ -72,24 +77,15 @@ export class List extends Command{
                 _contents.push(bubble);
             }
 
-            await client.pushMessage(sourceID, {
+            const message: Message = {
                 type: 'flex',
                 altText: 'List Command',
                 contents: {
                     type: 'carousel',
                     contents: _contents
                 }
-            });
-
-            let text = '';
-            for (let i=0; i<guilds.length; i++) {
-                text += `${i+1}. ${guilds[i].id}: ${guilds[i].name}\n`;
             }
 
-            const message: Message = {
-                type: 'text',
-                text: text
-            }
             resolve(message);
         })
     }

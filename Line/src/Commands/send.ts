@@ -8,9 +8,10 @@ export class Send extends Command {
     constructor() {
         super(
             {
+                permission: 'Premium',
                 name: 'send',
                 aliases: ['s'],
-                description: 'Send your Message to Discord Server.'
+                description: '(Comming Soon) Send your Message to Specific Discord Server using your Line Profile.'
             }
         );
     }

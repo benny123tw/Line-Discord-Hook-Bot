@@ -8,6 +8,7 @@ export class Subscribe extends Command {
     constructor() {
         super(
             {
+                permission: 'Free',
                 name: 'subscribe',
                 aliases: ['sub'],
                 description: 'Subscribe to the discord server.'

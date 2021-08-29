@@ -2,7 +2,8 @@
     "type": "carousel",
     "contents": [
         {
-            "type": "bubble",
+            "type": "bubble", 
+            "size": "micro",
             "hero": {
                 "type": "image",
                 "size": "full",

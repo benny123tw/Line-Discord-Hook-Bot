@@ -1,0 +1,138 @@
+{
+    "type": "bubble",
+    "hero": {
+        "type": "image",
+        "url": "https://sprofile.line-scdn.net/0hSiWs1SuNDEZ6ChplGmdyOQpaDyxZe1VUBm1CdE4PBiRHaUgUVTkQIh1YV3dGMhtDVWtBIR9YU3B2GXsgZFzwcn06UnFDPkwZVWRLow",
+        "aspectMode": "cover",
+        "size": "full"
+    },
+    "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "text",
+                "text": "STATUS",
+                "weight": "bold",
+                "color": "#1DB446",
+                "size": "sm"
+            },
+            {
+                "type": "text",
+                "text": "User Name",
+                "weight": "bold",
+                "size": "xxl",
+                "margin": "md"
+            },
+            {
+                "type": "text",
+                "text": "Enter a status message",
+                "size": "xs",
+                "color": "#aaaaaa",
+                "wrap": true
+            },
+            {
+                "type": "separator",
+                "margin": "xxl"
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "xxl",
+                "spacing": "sm",
+                "contents": [
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "Membership",
+                                "size": "sm",
+                                "color": "#555555",
+                                "flex": 0
+                            },
+                            {
+                                "type": "text",
+                                "text": "Premium",
+                                "size": "sm",
+                                "color": "#111111",
+                                "align": "end"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "Notify",
+                                "size": "sm",
+                                "color": "#555555",
+                                "flex": 0
+                            },
+                            {
+                                "type": "text",
+                                "text": "OFF",
+                                "size": "sm",
+                                "color": "#111111",
+                                "align": "end"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "Servers",
+                                "size": "sm",
+                                "color": "#555555",
+                                "flex": 0
+                            },
+                            {
+                                "type": "text",
+                                "text": "3",
+                                "size": "sm",
+                                "color": "#111111",
+                                "align": "end"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "separator",
+                "margin": "xl"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "margin": "md",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "USER ID",
+                        "size": "xs",
+                        "color": "#aaaaaa",
+                        "flex": 0
+                    },
+                    {
+                        "type": "text",
+                        "text": "#U0482e5...",
+                        "color": "#aaaaaa",
+                        "size": "xs",
+                        "align": "end"
+                    }
+                ]
+            }
+        ]
+    },
+    "styles": {
+        "footer": {
+            "separator": true
+        }
+    }
+}

@@ -7,6 +7,7 @@ export class Unsubscribe extends Command{
     constructor() {
         super(
             {
+                permission: 'Free',
                 name: 'unsubscribe',
                 aliases: ['unsub'],
                 description: 'Unsubscribe discord server.'

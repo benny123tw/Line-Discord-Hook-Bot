@@ -6,9 +6,10 @@ export interface IUser {
     username: string;
     sourceID: string;
     notify: boolean;
+    membership: string;
 }
 
-interface IUserDocument extends IUser, Document {
+export interface IUserDocument extends IUser, Document {
 }
 
 interface IUserModel extends Model<IUserDocument> {
@@ -22,6 +23,7 @@ const UserSchema = new Schema<IUserDocument>({
     username: { type: String, required: true },
     sourceID: { type: String, required: true },
     notify: { type: Boolean, default: false },
+    membership: { type: String, default: 'Free' },
 });
 
 UserSchema.statics.findByGuildName = function (name: string) {

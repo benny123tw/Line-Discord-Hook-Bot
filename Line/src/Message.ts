@@ -1,7 +1,5 @@
-import { WebhookEvent, MessageAPIResponseBase, Client } from "@line/bot-sdk";
+import { WebhookEvent, MessageAPIResponseBase, Client, Message } from "@line/bot-sdk";
 import axios from "axios";
-import { Discord } from "./Discord";
-import { connect } from "mongoose";
 import { dbOptions, MongoDB } from "./MongoDB";
 import { Command } from "./Commands/Command";
 
@@ -39,7 +37,7 @@ export default async (event: WebhookEvent, client: Client, database: MongoDB): P
         username: event.source.type === "group" ? data.groupName : data.displayName
     }
 
-    await database.createDB(options);
+    const user = await database.findOrCreate(options);
 
     console.log('cmd: ' + cmd)
 
@@ -56,6 +54,13 @@ export default async (event: WebhookEvent, client: Client, database: MongoDB): P
     );       
 
     try {
+        if (command.permission == 'Premium' && user.membership != 'Premium') {
+            return await client.pushMessage(sourceID, {
+                type: 'text',
+                text: `欲使用 「${command.name}」 指令請升級會員。`
+            });
+        }
+
         const result = await command.execute({
             args: args,
             userInfo: data,
@@ -65,10 +70,24 @@ export default async (event: WebhookEvent, client: Client, database: MongoDB): P
             sourceID: sourceID,
         });
 
-        if (result)
+        if (!result) return;
+        
+        if ( typeof result === "object" ) 
             await client.pushMessage(sourceID, result);
+        else
+            await client.pushMessage(sourceID, {
+                type: "text",
+                text: result
+            });
+        
     } catch (error) {
-        await client.pushMessage(sourceID, error);
+        if ( typeof error === "object" ) 
+            await client.pushMessage(sourceID, error);
+        else
+            await client.pushMessage(sourceID, {
+                type: "text",
+                text: error
+            });
     };
 
 }

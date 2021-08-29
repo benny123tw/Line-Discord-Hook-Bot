@@ -1,6 +1,6 @@
 import { response } from 'express';
 import { connect, model, Document, Schema, Model } from 'mongoose';
-import User from './User';
+import User, { IUserDocument } from './User';
 import Server from './Server';
 
 export class MongoDB {
@@ -24,33 +24,22 @@ export class MongoDB {
         if (result) console.log(`Connected to the Database!`);
     }
 
-    public async exsist(sourceID: string): Promise<boolean> {
-        // console.log(`test ${sourceID} exsist`);
-        const data = await User.findBySourceID(sourceID);
-        // console.log(`find the database action done.`);
-        if (data) return true;
-
-        return false;
-    }
-
-    public async createDB(options: dbOptions) {
+    public async findOrCreate(options: dbOptions): Promise<IUserDocument> {
         const {
             username,
             sourceID
         } = options;
+        return new Promise(async (resolve, reject) => {
 
-        // console.log(`try to create ${sourceID}\'s database`);
-        if (await this.exsist(sourceID)) return "User Exsist.";
-        // console.log(`check action done.`)
+            const data = await User.findBySourceID(sourceID);
+            if (data) return resolve(data);
+    
+            const userDB = await User.create({
+                "sourceID": sourceID,
+                "username": username
+            });
+            userDB.save();
 
-        const userDB = await User.create({
-            "sourceID": sourceID,
-            "username": username
-        });
-        userDB.save();
-        // console.log(`save action done.`)
-
-        return new Promise((resolve, reject) => {
             if (userDB) {
                 console.log("User data saved to the Database successfully!");
                 resolve(userDB);
