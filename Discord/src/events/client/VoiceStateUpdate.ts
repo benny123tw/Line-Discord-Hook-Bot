@@ -22,6 +22,8 @@ export default async function (bot: Bot, oldState: VoiceState, newState: VoiceSt
         channelName: '',
         action: 'none'
     }
+
+    if (newState.channelID == newState.guild.afkChannelID) return;
     
     userStatus.serverName = oldState.guild.name;
 
@@ -67,7 +69,7 @@ export default async function (bot: Bot, oldState: VoiceState, newState: VoiceSt
         match: { serverID: { $eq: newState.guild.id } }
     });
     
-    const result = userArr.filter(user => user.guilds.length);
+    const result = userArr.filter(user => user.guilds.length && user.notify);
 
     result.forEach((c, i) => {
         pushMessage(c.sourceID, userStatus, newState);

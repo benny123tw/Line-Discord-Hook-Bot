@@ -1,5 +1,6 @@
 import { Message } from "discord.js";
 import { Bot } from "src/Bot";
+import Server from "../../../src/models/Server";
 import { WebhookService } from "../../services/Webhook";
 
 export default async function (bot: Bot, message: Message): Promise<any> {
@@ -8,7 +9,11 @@ export default async function (bot: Bot, message: Message): Promise<any> {
 
     if (message.author.bot) return;
 
-    if (!message.content.startsWith(bot.config.prefix)) return;
+    if (!message.guild) return message.reply('Please join a voice channel.');
+
+    const _prefix = (await Server.findByServerID(message.guild.id)).prefix;
+
+    if (!message.content.startsWith(_prefix)) return;
 
     const args = message.content.slice(bot.config.prefix.length).split(/ +/);
     const cmd = args.shift()?.toLowerCase();    
